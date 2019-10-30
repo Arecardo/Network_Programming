@@ -1,0 +1,10 @@
+When did the First World War start?,1914
+How many states are there in the United States of America?,50
+Who is 45th president of the United States?,Donald Trump
+Which date (dd/mm) is celeberated as independence of the United States?,07/04
+Which state of the USA is known as Crossroad of America?,Indiana
+Who is the course instructor for Intro. to Computer Communication Networks?,Quamar Niyaz
+What is the course code for Intro. to Computer Communication Networks?,ECE54700
+How many zeros are there in 10 billion?,10
+Who is the founder of Apple Inc?,Steve Jobs
+Name the most popular electric car manufacturer.,Tesla
