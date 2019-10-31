@@ -1,25 +1,24 @@
 '''
-This is the python file for creating a game server.
+Author: Xinrun Zhang
+Date: 10/31/2019
+Description: This is the python file for the game server.
 '''
 
 import socket
 
-# Open the file...
-# Read the file by lines...
-f = open('quiz.txt', 'r')
+def load_data(Question, Answer):
+    # Open the file
+    f = open('quiz.txt', 'r')
 
-# Variable 'lines' is a tuple with each element is a string and each string contains a
-# line in the txt file.
-lines = f.readlines()
+    # Read the file by lines
+    # Variable 'lines' is a tuple whose each element is a string, and each string respect to a
+    # line in the txt file.
+    lines = f.readlines()
 
-# Split the 'lines' into two tuples 'Question' and 'Answer'...
-Question = []
-Answer = []
-for line in lines:
-    piece = line.split(',')
-    Question.append(piece[0])
-    Answer.append(piece[1])
-
-print(lines)
-print(Question)
-print(Answer)
+    # Split the 'lines' into two tuples 'Question' and 'Answer'
+    # Each element in 'Question' respect to each element in 'Answer'
+    # e.g. Answer[0] is the answer for Question[0]
+    for line in lines:
+        piece = line.split(',')
+        Question.append(piece[0])
+        Answer.append(piece[1][:-2])
