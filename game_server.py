@@ -5,8 +5,14 @@ Description: This is the python file for the game server.
 '''
 
 import socket
+import threading
+import random
 
 def load_data(questions, answers):
+    # input - two tuples: questions, answers
+    # output - N/A
+    # This function is used to load data from quiz.txt. It modifiys two tuples.
+
     # Open the file
     f = open('quiz.txt', 'r')
 
@@ -23,9 +29,69 @@ def load_data(questions, answers):
         questions.append(piece[0])
         answers.append(piece[1][:-2])
 
+# For multiple client connections, we have to define a class to create threads for
+# each connections.
+class ClientThread(threading.Thread):
+    def __init__(self,clientAddress,clientsocket):
+        threading.Thread.__init__(self)
+        self.csocket = clientsocket
+        print("---------------------------------------------")
+        print("New connection added: ", clientAddress)
+
+    def run(self):
+        print ("Connection from : ", clientAddress)
+        #self.csocket.send(bytes("Hi, This is from Server..",'utf-8'))
+        # Generate three random numbers in 0-10 to pick the questions.
+        question_index = random.sample(range(0,10),3)
+        # Init a variable to count the correct answers
+        count_correct = 0
+        # Send some basic messages to the client.
+        self.csocket.send(bytes('Welcome to the game!\nThere are three questions you need to answer!\nLets Go!','UTF-8'))
+        # Send the first question and get the answer
+        self.csocket.send(bytes(questions[question_index[0]],'UTF-8'))
+        answer_1 = self.csocket.recv(1024).decode()
+        if answer_1 == answers[question_index[0]]:
+            count_correct += 1
+
+        # Send the second question and get the answer
+        self.csocket.send(bytes(questions[question_index[1]],'UTF-8'))
+        answer_2 = self.csocket.recv(1024).decode()
+        if answer_2 == answers[question_index[1]]:
+            count_correct += 1
+        # Send the third question and get the answer
+        self.csocket.send(bytes(questions[question_index[2]],'UTF-8'))
+        answer_3 = self.csocket.recv(1024).decode()
+        if answer_3 == answers[question_index[2]]:
+            count_correct += 1
+
+        # According to the value of count_correct to return the result
+        if count_correct == 0:
+            self.csocket.send(bytes('Sorry!Please come again after practice!','UTF-8'))
+        else:
+            self.csocket.send(bytes('Congratulations, you played very well!','UTF-8'))
+        print ("Client at ", clientAddress , " disconnected...")
+
+
 if __name__ == "__main__":
+    # Load the data
     questions = []
     answers = []
     load_data(questions, answers)
-    print(questions)
-    print(answers)
+
+    # Create the socket
+    # Bind the localhost and port number
+    # Print the initial message
+    # start listen
+    LOCALHOST = "127.0.0.1"
+    PORT = 13245
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server.bind((LOCALHOST, PORT))
+    print("Hello! This is game server!")
+    print("Server started...")
+    print("Waiting for client request...")
+    while True:
+        server.listen(1)
+        clientsock, clientAddress = server.accept()
+        newthread = ClientThread(clientAddress, clientsock)
+        newthread.start()
