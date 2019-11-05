@@ -27,7 +27,7 @@ def load_data(questions, answers):
     for line in lines:
         piece = line.split(',')
         questions.append(piece[0])
-        answers.append(piece[1][:-2])
+        answers.append(piece[1][:-1])
 
 # For multiple client connections, we have to define a class to create threads for
 # each connections.
