@@ -58,6 +58,7 @@ class ClientThread(threading.Thread):
         answer_2 = self.csocket.recv(1024).decode()
         if answer_2 == answers[question_index[1]]:
             count_correct += 1
+
         # Send the third question and get the answer
         self.csocket.send(bytes(questions[question_index[2]],'UTF-8'))
         answer_3 = self.csocket.recv(1024).decode()
