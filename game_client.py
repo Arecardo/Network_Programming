@@ -1,7 +1,7 @@
 '''
 Author: Xinrun Zhang
 Date: 10/31/2019
-Description: This is the python file for the game server.
+Description: This is the python file for the game client.
 '''
 
 import socket
