@@ -20,6 +20,52 @@ if __name__ == "__main__":
     print("Server started...")
     while True:
         server.listen(1)
+        # get connection from the web browser
         clientsocket, clientAddress = server.accept()
+        print("Get request from: ", clientAddress)
+
+        # get the http request from the web browser
         request = clientsocket.recv(2048).decode()
-        request = request.split('\n')
+        print("the request looks like:", request)
+
+        # HTTP header analysis
+        request = request.split('\n') # split the header
+        http_header = request[0].split(' ') # split the first line: e.g. GET /index.html HTTP/1.1
+        file_name = http_header[1] # get the requested file name
+        print("It requests for: ", file_name)
+
+        if file_name == '/index.html' or file_name == '/':
+            clientsocket.send('HTTP/1.1 200 OK\n')
+            clientsocket.send('Content-Type: text/html\n')
+            clientsocket.send('\n')
+            clientsocket.send("""
+                            <!DOCTYPE html>
+                            <html>
+                            <title>ECE54700 Demo Page</title>
+                            <body>
+
+                            <h3>Welcome to ECE54700 Hands-on 1 webpage</h3>
+                            In this hands-on assignment, you will implement a basic web server and a quiz game in Python. </br>
+                            Please review socket programming and HTTP protocol in Chapter 2 of the textbook before implementing this assignment. </br>
+                            Please be aware that any kind of plagiarism will not be tolerated.
+
+                            </body>
+                            </html>
+            """)
+            clientsocket.close()
+        elif file_name == '/assignment1.txt':
+            f = open('assignment1.txt', 'r')
+            content = f.read()
+
+            clientsocket.send('HTTP/1.1 200 OK\n')
+            clientsocket.send('Content-Type: text/html\n')
+            clientsocket.send('\n')
+            clientsocket.send(content)
+            clientsocket.close()
+        else:
+            clientsocket.send('HTTP/1.1 404 Not Found\n')
+            clientsocket.send('Content-Type: text/html\n')
+            clientsocket.send('\n')
+            clientsocket.close()
+        print("The connection is complete.")
+        print("------------------------------------------")
