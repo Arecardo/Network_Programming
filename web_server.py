@@ -35,10 +35,10 @@ if __name__ == "__main__":
         print("It requests for: ", file_name)
 
         if file_name == '/index.html' or file_name == '/':
-            clientsocket.send('HTTP/1.1 200 OK\n')
-            clientsocket.send('Content-Type: text/html\n')
-            clientsocket.send('\n')
-            clientsocket.send("""
+            clientsocket.send(bytes('HTTP/1.1 200 OK\n', 'UTF-8'))
+            clientsocket.send(bytes('Content-Type: text/html\n', 'UTF-8'))
+            clientsocket.send(bytes('\n', 'UTF-8'))
+            clientsocket.send(bytes("""
                             <!DOCTYPE html>
                             <html>
                             <title>ECE54700 Demo Page</title>
@@ -51,21 +51,21 @@ if __name__ == "__main__":
 
                             </body>
                             </html>
-            """)
+            """, 'UTF-8'))
             clientsocket.close()
         elif file_name == '/assignment1.txt':
             f = open('assignment1.txt', 'r')
             content = f.read()
 
-            clientsocket.send('HTTP/1.1 200 OK\n')
-            clientsocket.send('Content-Type: text/html\n')
-            clientsocket.send('\n')
-            clientsocket.send(content)
+            clientsocket.send(bytes('HTTP/1.1 200 OK\n', 'UTF-8'))
+            clientsocket.send(bytes('Content-Type: text/html\n', 'UTF-8'))
+            clientsocket.send(bytes('\n', 'UTF-8'))
+            clientsocket.send(bytes(content, 'UTF-8'))
             clientsocket.close()
         else:
-            clientsocket.send('HTTP/1.1 404 Not Found\n')
-            clientsocket.send('Content-Type: text/html\n')
-            clientsocket.send('\n')
+            clientsocket.send(bytes('HTTP/1.1 404 Not Found\n', 'UTF-8'))
+            clientsocket.send(bytes('Content-Type: text/html\n', 'UTF-8'))
+            clientsocket.send(bytes('\n', 'UTF-8'))
             clientsocket.close()
         print("The connection is complete.")
         print("------------------------------------------")
