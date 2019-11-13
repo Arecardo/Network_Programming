@@ -42,31 +42,20 @@ class ClientThread(threading.Thread):
         print ("Connection from : ", clientAddress)
         #self.csocket.send(bytes("Hi, This is from Server..",'utf-8'))
         # Generate three random numbers in 0-10 to pick the questions.
-        question_index = random.sample(range(0,10),3)
+        question_index = random.sample(range(0,10),10)
         # Init a variable to count the correct answers
         count_correct = 0
-        # Send some basic messages to the client.
-        self.csocket.send(bytes('Welcome to the game!\nThere are three questions you need to answer!\nLets Go!','UTF-8'))
+        # Send the initial messages to the client.
+        self.csocket.send(bytes('Welcome to the game!\nThere are several questions you need to answer!\n','UTF-8'))
         # Send the first question and get the answer
-        self.csocket.send(bytes(questions[question_index[0]],'UTF-8'))
-        answer_1 = self.csocket.recv(1024).decode()
-        if answer_1 == answers[question_index[0]]:
-            count_correct += 1
-
-        # Send the second question and get the answer
-        self.csocket.send(bytes(questions[question_index[1]],'UTF-8'))
-        answer_2 = self.csocket.recv(1024).decode()
-        if answer_2 == answers[question_index[1]]:
-            count_correct += 1
-
-        # Send the third question and get the answer
-        self.csocket.send(bytes(questions[question_index[2]],'UTF-8'))
-        answer_3 = self.csocket.recv(1024).decode()
-        if answer_3 == answers[question_index[2]]:
-            count_correct += 1
+        for i in range(0, 10):
+            self.csocket.send(bytes(questions[question_index[i]],'UTF-8'))
+            answer_recv = self.csocket.recv(1024).decode()
+            if answer_recv == answers[question_index[0]]:
+                count_correct += 1
 
         # According to the value of count_correct to return the result
-        if count_correct == 0:
+        if count_correct <= 7:
             self.csocket.send(bytes('Sorry!Please come again after practice!','UTF-8'))
         else:
             self.csocket.send(bytes('Congratulations, you played very well!','UTF-8'))
