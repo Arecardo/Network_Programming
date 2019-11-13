@@ -51,11 +51,11 @@ class ClientThread(threading.Thread):
         for i in range(0, 10):
             self.csocket.send(bytes(questions[question_index[i]],'UTF-8'))
             answer_recv = self.csocket.recv(1024).decode()
-            if answer_recv == answers[question_index[0]]:
-                count_correct += 1
+            if answer_recv == answers[question_index[i]]:
+                count_correct = count_correct + 1
 
         # According to the value of count_correct to return the result
-        if count_correct <= 7:
+        if count_correct < 7:
             self.csocket.send(bytes('Sorry!Please come again after practice!','UTF-8'))
         else:
             self.csocket.send(bytes('Congratulations, you played very well!','UTF-8'))
