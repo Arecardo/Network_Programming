@@ -14,8 +14,8 @@ void load_data(){
 
 void generate_demo(vector<int> &temp_test_val, vector<int> &temp_test_wt){
   // use array to store data
-  int a = [3, 4, 15, 4, 21, 6, 8, 9, 1, 12];
-  int b = [2, 3, 7, 3, 15, 4, 5, 3, 1, 6];
+  int a[10] = {3, 4, 15, 4, 21, 6, 8, 9, 1, 12};
+  int b[10] = {2, 3, 7, 3, 15, 4, 5, 3, 1, 6};
 
   //assign data to the vectors
   for(int i=0; i<10; i++)
@@ -34,8 +34,8 @@ public:
   */
   vector<vector<int>> get_solution(vector<int> &val, vector<int> &wt, int capacity_limit){
     // get the size of val and wt
-    len_val = val.size();
-    len_wt = wt.size();
+    int len_val = val.size();
+    int len_wt = wt.size();
 
     // initial the solution table,
     // the size of table is (len_val)*(capacity+1)
@@ -46,19 +46,19 @@ public:
       solution_table[i][0] = 0;
     }
 
-    for(int i = 0; i < capacity+1; i++){
+    for(int i = 0; i < capacity_limit+1; i++){
       solution_table[0][i] = 0;
     }
 
     // iteratively generate the value of each cell
-    for(int item = 1; item < len_val+1; i++){
-      for(int curr_cap = 1; curr_cap < capacity+1; j++){
+    for(int item = 1; item < len_val+1; item++){
+      for(int curr_cap = 1; curr_cap < capacity_limit+1; curr_cap++){
         int max_val_without_curr = solution_table[item - 1][curr_cap]; // this is always exist
-        int max_with_curr = 0; // initial the value to 0
+        int max_val_with_curr = 0; // initial the value to 0
 
         int curr_wt = wt[item-1]; // get the current item's weight
         if(curr_cap >= curr_wt){ // check if the knapsack can include the current item
-          max_val_with_curr = val[item - 1]; // if it is, get the current value of the item
+          int max_val_with_curr = val[item - 1]; // if it is, get the current value of the item
 
           // get the remaining capacity if we include the current item in the knapsack
           int remain_cap = curr_cap - curr_wt;
@@ -93,5 +93,7 @@ int main(){
   vector<vector<int>> demo_solution_table;
   solution demo_solution;
   demo_solution_table = demo_solution.get_solution(temp_test_val, temp_test_wt, capacity_limit);
+  cout << demo_solution_table[10][10] << endl;
+
   return 0;
 }
