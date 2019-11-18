@@ -100,6 +100,10 @@ void demo(){
   cout << "----------------------------------------------------" << endl;
 }
 
+void user_manual_test(){
+  
+}
+
 int main(){
   cout << "****************************************************" << endl;
   cout << "*           Welcome to the knapsack program        *" << endl;
