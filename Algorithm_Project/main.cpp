@@ -58,7 +58,7 @@ public:
     }
 
     // print out the result
-    cout << "The final result is: ";
+    cout << "The maximum value you can carry is: ";
     cout << solution_table[len_val][capacity_limit] << endl;
     cout << endl;
   }
