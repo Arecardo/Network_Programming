@@ -91,7 +91,8 @@ void demo(){
   cout << "The capacity of the bag is: " << capacity_limit << endl;
 
   // create solution object
-  // get solution_table
+  // call the get_solution function
+  // the function will print out the final result
   cout << endl << "Calculating..." << endl;
   int demo_solution_table[11][11];
   solution demo_solution;
@@ -101,7 +102,50 @@ void demo(){
 }
 
 void user_manual_test(){
-  
+  // print out message
+
+  // initial vecoters to store the user input val and wt
+  // initial int to store the user input capacity
+  vector<int> user_input_val;
+  vector<int> user_input_wt;
+  int user_input_cap_limit;
+
+  // user input
+  cout << "Please input the value of the items with space, like 'xx xx xx xx', put enter as end: " << endl;
+  int i=0, temp=0;
+  while(cin >> temp){
+    user_input_val.push_back(temp);
+    cout << temp << " ";
+  }
+
+  cout << "Please input the weight of the items with space, like 'xx xx xx xx', put enter as end: " << endl;
+  int i=0, temp=0;
+  while(cin >> temp){
+    user_input_wt.push_back(temp);
+    cout << temp << " ";
+  }
+
+  cout << "Please input the limited capacity, it should be an integer: " << endl;
+  cin >> user_input_cap_limit;
+
+  // check if the input is valid
+  int len_val = user_input_val.size();
+  int len_wt = user_input_wt.size();
+  if(len_val != len_wt){
+    cout << "Sorry, the numbers of elements in the input array are not equal! Please try again! " << endl;
+  }
+  else if(user_input_val.empty() || user_input_wt.empty()){
+    cout << "Sorry, one of the arrays is empty or both arrays are empty! Please try again! " << endl;
+  }
+  else{
+    // turn the vectors into arrays
+    int *new_val = new int[user_input_val.size()];
+    if (!user_input_val.empty() && !user_input_wt.empty())
+    {
+        memcpy(buffer, &vecHeight[0], vecHeight.size()*sizeof(float));
+    }
+  }
+
 }
 
 int main(){
