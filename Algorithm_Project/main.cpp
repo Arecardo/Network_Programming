@@ -6,6 +6,8 @@
 
 #include<iostream>
 #include<vector>
+#include<string>
+#include<sstream>
 using namespace std;
 
 class solution{
@@ -94,7 +96,6 @@ void demo(){
   // call the get_solution function
   // the function will print out the final result
   cout << endl << "Calculating..." << endl;
-  int demo_solution_table[11][11];
   solution demo_solution;
   demo_solution.get_solution(temp_test_val, temp_test_wt, capacity_limit, len_val);
   cout << "The domo is done! Thank you! " << endl;
@@ -103,27 +104,31 @@ void demo(){
 
 void user_manual_test(){
   // print out message
+  cout << "----------------------------------------------------" << endl;
+  cout << "Welcome to the mode 2! " << endl;
+  cout << "In this mode, you have to input some information about the problem manually! " << endl;
 
   // initial vecoters to store the user input val and wt
   // initial int to store the user input capacity
   vector<int> user_input_val;
   vector<int> user_input_wt;
   int user_input_cap_limit;
+  int temp = 0;
 
   // user input
   cout << "Please input the value of the items with space, like 'xx xx xx xx', put enter as end: " << endl;
-  int i=0, temp=0;
   while(cin >> temp){
     user_input_val.push_back(temp);
-    cout << temp << " ";
+    if(cin.get() == '\n') break;
   }
+  cin.clear();
 
   cout << "Please input the weight of the items with space, like 'xx xx xx xx', put enter as end: " << endl;
-  int i=0, temp=0;
   while(cin >> temp){
     user_input_wt.push_back(temp);
-    cout << temp << " ";
+    if(cin.get() == '\n') break;
   }
+  cin.clear();
 
   cout << "Please input the limited capacity, it should be an integer: " << endl;
   cin >> user_input_cap_limit;
@@ -133,17 +138,30 @@ void user_manual_test(){
   int len_wt = user_input_wt.size();
   if(len_val != len_wt){
     cout << "Sorry, the numbers of elements in the input array are not equal! Please try again! " << endl;
+    cout << "----------------------------------------------------" << endl;
   }
   else if(user_input_val.empty() || user_input_wt.empty()){
     cout << "Sorry, one of the arrays is empty or both arrays are empty! Please try again! " << endl;
+    cout << "----------------------------------------------------" << endl;
   }
   else{
     // turn the vectors into arrays
     int *new_val = new int[user_input_val.size()];
+    int *new_wt = new int[user_input_wt.size()];
     if (!user_input_val.empty() && !user_input_wt.empty())
     {
-        memcpy(buffer, &vecHeight[0], vecHeight.size()*sizeof(float));
+        memcpy(new_val, &user_input_val[0], user_input_val.size()*sizeof(int));
+        memcpy(new_wt, &user_input_wt[0], user_input_wt.size()*sizeof(int));
     }
+
+    // create solution object
+    // call the get_solution function
+    // the function will print out the final result
+    cout << endl << "Calculating..." << endl;
+    solution user_solution;
+    user_solution.get_solution(new_val, new_wt, user_input_cap_limit, len_val);
+    cout << "The calculation is done! Thank you! " << endl;
+    cout << "----------------------------------------------------" << endl;
   }
 
 }
@@ -166,7 +184,7 @@ int main(){
       demo();
     }
     else if(user_choice == 2) {
-      cout << "Sorry, I'm still working on this part!" << endl;
+      user_manual_test();
     }
     else if(user_choice == 3){
       break;
