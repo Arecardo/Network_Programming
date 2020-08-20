@@ -4,9 +4,6 @@
 
 #include "character.h"
 
-// initial an out mutex
-std::mutex out_mu;
-
 // Buffer constructor
 Buffer:: Buffer(const int& n)
     :size(n)
