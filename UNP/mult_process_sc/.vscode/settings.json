@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "type_traits": "cpp",
         "__bit_reference": "cpp",
         "__config": "cpp",
         "__debug": "cpp",
@@ -23,7 +24,6 @@
         "chrono": "cpp",
         "cmath": "cpp",
         "complex": "cpp",
-        "condition_variable": "cpp",
         "cstdarg": "cpp",
         "cstddef": "cpp",
         "cstdint": "cpp",
@@ -33,7 +33,6 @@
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
-        "deque": "cpp",
         "exception": "cpp",
         "functional": "cpp",
         "initializer_list": "cpp",
@@ -57,22 +56,9 @@
         "string_view": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
-        "type_traits": "cpp",
         "typeinfo": "cpp",
         "unordered_map": "cpp",
         "utility": "cpp",
-        "vector": "cpp",
-        "thread": "cpp",
-        "__tree": "cpp",
-        "codecvt": "cpp",
-        "csignal": "cpp",
-        "coroutine": "cpp",
-        "future": "cpp",
-        "iomanip": "cpp",
-        "list": "cpp",
-        "map": "cpp",
-        "set": "cpp",
-        "typeindex": "cpp",
-        "variant": "cpp"
+        "vector": "cpp"
     }
 }
