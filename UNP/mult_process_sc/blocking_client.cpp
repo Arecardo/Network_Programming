@@ -26,7 +26,7 @@ int main(int argc, char** argv){
     struct sockaddr_in servaddr;
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(9877);
+    servaddr.sin_port = htons(9999);
     inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr);
 
     // connect to the server

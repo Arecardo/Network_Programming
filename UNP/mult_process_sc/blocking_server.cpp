@@ -1,5 +1,5 @@
 /*
- * multi-process tcp server
+ * blocking tcp server
  * date: 11/06/2020
 */
 
